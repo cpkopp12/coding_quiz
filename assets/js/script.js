@@ -1,19 +1,23 @@
 // parent.empty() removes child elements from parent
-var startBtn = document.querySelector("#start-btn");
+var mainEls = document.querySelector("#main-els");
+var mainTitle = document.querySelector("#question");
+var qcount = 0;
 
 var q1 = {
     question : "Question 1",
     choiceA : "choice a",
     choiceB : "choice b",
     choiceC : "choice c",
-    choiceD : "choice d"
+    choiceD : "choice d",
+    answer : "choice_b"
 }
 var q2 = {
     question : "Question 2",
     choiceA : "choice a2",
     choiceB : "choice b2",
     choiceC : "choice c2",
-    choiceD : "choice d2"
+    choiceD : "choice d2",
+    answer : "choice_a"
 }
 var qsArray = [q1,q2];
 
@@ -47,21 +51,15 @@ var loadNewQuestion = function(qnum) {
    
 };
 
-// CHOICE HANDLER Function
-var choiceHandler = function() {
 
-};
 
 // START BUTTON HANDLER function
-var startBtnHandler = function() {
-    var qcount = 0;
-    var mainEls = document.querySelector("#main-els");
-    var mainTitle = document.querySelector("#question");
-    //while qcount < qsArray.length-1 and timer
+var choiceHandler = function() {
     var qAndChoices = loadNewQuestion(qsArray[qcount]);
     mainTitle.textContent = qAndChoices[0];
     mainEls.replaceChildren(qAndChoices[1],qAndChoices[2],qAndChoices[3],qAndChoices[4]);
-    //add event listener for mainEls, function checks choices then loads new question
+    
+    qcount ++;
 };
 
-startBtn.addEventListener("click", startBtnHandler)
+mainEls.addEventListener("click", choiceHandler);

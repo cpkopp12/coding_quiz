@@ -123,6 +123,7 @@ var mainTitle = document.querySelector("#question");
 var timerEl = document.querySelector("#timer");
 // correct incorrect display element
 var rightWrong = document.createElement("p");
+rightWrong.setAttribute("class","right-wrong");
 //index for questions array
 var qcount = 0;
 //score counters
@@ -136,17 +137,20 @@ var timerInt;
 //high score form
 var scoreForm = document.createElement("form");
 scoreForm.setAttribute("id","score-form");
+scoreForm.setAttribute("class","score-form-div");
 // submit score button
 var scoreSubmit = document.createElement("button");
 scoreSubmit.className = "answer-choice";
 scoreSubmit.setAttribute("id","score-submit-btn");
 scoreSubmit.setAttribute("type","submit");
 scoreSubmit.textContent = "Submit";
+scoreSubmit.setAttribute("class", "score-form-btn");
 // high score input
 var scoreInput = document.createElement("input");
 scoreInput.setAttribute("type","text");
 scoreInput.setAttribute("name","score-input");
-scoreInput.setAttribute("placeholder","Enter your initials.");
+scoreInput.setAttribute("placeholder", "Enter your initials.");
+scoreInput.setAttribute("class", "score-text-input");
 //Append to form element
 scoreForm.appendChild(scoreInput);
 scoreForm.appendChild(scoreSubmit);
@@ -218,7 +222,7 @@ var scoreSubmitted = function(event) {
 
     var storeScore = {
         initial : scoreInput.value,
-        quizScore : tScore
+        quizScore : tScore.toFixed(2)
     }
     allScores.push(storeScore);
     localStorage.setItem("scores",JSON.stringify(allScores));
@@ -229,8 +233,9 @@ var scoreSubmitted = function(event) {
 var loadScoreForm = function() {
     mainTitle.textContent = "All Done!";
     var textEl = document.createElement("p");
+    textEl.setAttribute("class","score-form-text");
     tScore = (qsCorrect/(qsCorrect+qsIncorrect))*100;
-    textEl.innerHTML = "your score is " + tScore.toString()+" %";
+    textEl.innerHTML = "your score is " + tScore.toFixed(2)+" %";
     mainEls.replaceChildren(textEl,scoreForm);
     scoreForm.addEventListener("submit",scoreSubmitted);
 };
@@ -280,20 +285,29 @@ var loadNewQuestion = function(qnum) {
 
 // CHOICE HANDLER function, calls loadNewQuestion() and setTimer() functions
 var choiceHandler = function(event) {
-    //Three specific targets have to be treated totally differently, one is a form and not in this function
-    //Other two = goBackButton and clearScoresBtn, use if(goBack){} else if (clearScores){} else {EVERYTHING ELSE}
+    //Three specific targets have to be treated totally differently from the rest of the quiz, 
+    //one is a form and not in this function (in loadScoreForm()). Other two = goBackButton and clearScoresBtn,
+    //use if(goBack){} else if (clearScores){} else {EVERYTHING ELSE}
     if (event.target.getAttribute("id")==="go-back-btn") {
+        //Just recreate the starting page, same ids and classes
         mainTitle.textContent = "Start Quiz";
+
         var quizInstructions = document.createElement("p");
-        quizInstructions.textContent = "Instructions for starting quiz";
+        quizInstructions.textContent = "You will have 75 seconds to start. For every incorrect answer, 15 seconds will be subtracted from your time remaining.";
+        quizInstructions.setAttribute("class", "quiz-instructions");
+
         var startButton = document.createElement("button");
         startButton.setAttribute("class","answer-choice");
         startButton.setAttribute("id","start-btn");
         startButton.textContent = "Start Quiz";
+
         mainEls.replaceChildren(quizInstructions,startButton);
+
     } else if (event.target.getAttribute("id")==="clear-scores-btn") {
+        //Remove high scores then call function loadHighScores() to refresh and erase in local storage
         localStorage.removeItem("scores");
         loadHighScores();
+
     } else {
         //RESET ALL QUIZ VARS IF START BUTTON
         if (event.target.getAttribute("id")==="start-btn") {
@@ -309,6 +323,7 @@ var choiceHandler = function(event) {
             window.alert("You answered all of the questions! Enter your initials to submit your score!");
             return false;
         }
+
         //LOAD NEXT QUESTION
         var qAndChoices = loadNewQuestion(qsArray[qcount]);
         //GET TARGET OF LAST CHOICE

@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    align-items: center;
+}
+
+header  {
+    padding: 25px 35px;
+    display: flex;
+    justify-content:space-between;
+    flex-wrap: wrap; 
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
+    z-index: 9999;
+}
+
+.timer-text {
+    padding: 10px 15px;
+    font-weight: lighter;
+    font-size: 1.60vw;
+    border: 3px solid black;
+    border-radius: 10px;
+    color: black;
+}
+
+.highscores-btn {
+    padding: 10px 15px;
+    font-weight: lighter;
+    font-size: 1.25vw;
+    border-radius: 10px;
+    background-color: #183BF0;
+    color: whitesmoke;
+}
+
+.answer-choice {
+    padding: 15px 20px;
+    font-weight: lighter;
+    font-size: 1.50vw;
+    border-radius: 10px;
+    background-color: purple;
+    color: whitesmoke;
+    margin-bottom: 20px;
+    align-items: center;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-title {
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.main-elements {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.score-form-div {
+    padding: 15px 30px;
+}
+
+.score-text-input {
+    padding: 10px 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.score-form-btn { 
+    padding: 15px 20px;
+    font-weight: lighter;
+    font-size: 1.50vw;
+    border-radius: 10px;
+    background-color: purple;
+    color: whitesmoke;
+    margin-bottom: 20px;
+    align-items: center;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quiz-instructions {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.50vw;
+}
+
+.scores-ul{
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+    padding: 10px 30%;
+}
+
+.highscore-list-el {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 3px solid #183BF0;
+    border-radius: 10px;
+    background-color: #183BF0;
+    color: whitesmoke;
+    padding: 10px;
+
+}
+
+.score-form-text {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.50vw;
+}
+
+.right-wrong {
+    text-align: center;
+    font-size: 2.50vw;
+    border-top: 3px solid purple;
+    color: #183BF0;
+}

@@ -2,41 +2,118 @@
 // THE INTERVIEW PREPERATION SECTION OF SANFOUNDRY.COM
 //********************************************************************************************************** */
 
-// 
+// 1
 var q1 = {
-    question : "Question 1",
-    choiceA : "choice a",
-    choiceB : "choice b",
-    choiceC : "choice c",
-    choiceD : "choice d",
-    answer : "choice_b"
+    question : "What is JavaScript?",
+    choiceA : "a) JavaScript is a scripting language used to make the website interactive",
+    choiceB : "b) JavaScript is an assembly language used to make the website interactive",
+    choiceC : "c) JavaScript is a compiled language used to make the website interactive",
+    choiceD : "d) None of the mentioned",
+    answer : "choice_a"
 }
+// 2
 var q2 = {
-    question : "Question 2",
-    choiceA : "choice a2",
-    choiceB : "choice b2",
-    choiceC : "choice c2",
-    choiceD : "choice d2",
+    question : "Which of the following is correct about JavaScript?",
+    choiceA : "a) JavaScript is an Object-Based language",
+    choiceB : "b) JavaScript is Assembly-language",
+    choiceC : "c) JavaScript is an Object-Oriented language",
+    choiceD : "d) JavaScript is a High-level language",
     answer : "choice_a"
 }
-
+//3
 var q3 = {
-    question : "Question 3",
-    choiceA : "choice a3",
-    choiceB : "choice b3",
-    choiceC : "choice c3",
-    choiceD : "choice d3",
+    question : "Among the given statements, which statement defines closures in JavaScript?",
+    choiceA : "a) JavaScript is a function that is enclosed with references to its inner function scope",
+    choiceB : "b) JavaScript is a function that is enclosed with references to its lexical environment",
+    choiceC : "c) JavaScript is a function that is enclosed with the object to its inner function scope",
+    choiceD : "d) None of the mentioned",
+    answer : "choice_b"
+}
+//6
+var q4 = {
+    question : "Arrays in JavaScript are defined by which of the following statements?",
+    choiceA : "a) It is an ordered list of values",
+    choiceB : "b) It is an ordered list of objects",
+    choiceC : "c) It is an ordered list of string",
+    choiceD : "d) It is an ordered list of functions",
+    answer : "choice_a"
+}
+//10
+var q5 = {
+    question : "Which of the following is not javascript data types?",
+    choiceA : "a) Null type",
+    choiceB : "b) Undefined type",
+    choiceC : "c) Number type",
+    choiceD : "d) All of the mentioned",
+    answer : "choice_d"
+}
+//11
+var q6 = {
+    question : "Where is Client-side JavaScript code is embedded within HTML documents?",
+    choiceA : "a) A URL that uses the special javascript:code",
+    choiceB : "b) A URL that uses the special javascript:protocol",
+    choiceC : "c) A URL that uses the special javascript:encoding",
+    choiceD : "d) A URL that uses the special javascript:stack",
+    answer : "choice_b"
+}
+//13
+var q7 = {
+    question : "Which of the following object is the main entry point to all client-side JavaScript features and APIs?",
+    choiceA : "a) Position",
+    choiceB : "b) Window",
+    choiceC : "c) Standard",
+    choiceD : "d) Location",
+    answer : "choice_b"
+}
+//16
+var q8 = {
+    question : "Which of the following can be used to call a JavaScript Code Snippet?",
+    choiceA : "a) Function/Method",
+    choiceB : "b) Preprocessor",
+    choiceC : "c) Triggering Event",
+    choiceD : "d) RMI",
+    answer : "choice_a"
+}
+//19
+var q9 = {
+    question : "Which of the following explains correctly what happens when a JavaScript program is developed on a Unix Machine?",
+    choiceA : "a) will work perfectly well on a Windows Machine",
+    choiceB : "b) will be displayed as JavaScript text on the browser",
+    choiceC : "c) will throw errors and exceptions",
+    choiceD : "d) must be restricted to a Unix Machine only",
+    answer : "choice_a"
+}
+//24
+var q10 = {
+    question : "Which of the following scoping type does JavaScript use?",
+    choiceA : "a) Sequential",
+    choiceB : "b) Segmental",
+    choiceC : "c) Lexical",
+    choiceD : "d) Literal",
+    answer : "choice_c"
+}
+//25
+var q11 = {
+    question : "What is the basic difference between JavaScript and Java?",
+    choiceA : "a) Functions are considered as fields",
+    choiceB : "b) Functions are values, and there is no hard distinction between methods and fields",
+    choiceC : "c) Variables are specific",
+    choiceD : "d) There is no difference",
     answer : "choice_b"
 }
 
-var q4 = {
-    question : "Question 4",
-    choiceA : "choice a4",
-    choiceB : "choice b4",
-    choiceC : "choice c4",
-    choiceD : "choice d4",
-    answer : "choice_a"
-}
+
+
+
+
+
+
+
+//******************************************************
+//Rest of the code is mine
+//****************************************************** 
+
+
 //high score el
 var scoreBtnEl = document.querySelector("#highscores-btn");
 // main elements
@@ -76,15 +153,20 @@ scoreForm.appendChild(scoreSubmit);
 // Allscores array
 var allScores=[];
 
-
-var qsArray = [q1,q2,q3,q4];
+//ARRAY OF QUESTION, initialized it by hand like this so I could have all the questions 
+// at the very top of the file
+//IF USER ANSWERS ALL QUESTIONS BEFORE TIME: an alert window will pop up to inform user
+// that they answered all of the questions and prompt them to enter their initials in the form
+var qsArray = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11];
 
 
 //LOAD HIGH SCORES, going to use same function for both ways of accessing 
 //(from submitting score form and clicking highscore button)
 //scoreSubmitted already loaded current score to local storage, so it doesn't matter which
+// just need to check if scores is empty
 var loadHighScores = function(){
-    //re-setup event listener on main-els incase coming from score submit form
+
+    //re-setup event listener on main-els incase user coming from score submit form
     mainEls.addEventListener("click", choiceHandler);
 
     //Create highscore pages GO BACK and CLEAR HIGH SCORE buttons
@@ -98,22 +180,22 @@ var loadHighScores = function(){
     clearScoresBtn.textContent = "Clear High Scores";
 
     allScores = localStorage.getItem("scores");
+    //check if empty
     if (allScores === null) {
         mainTitle.textContent = "No highscores yet!";
         mainEls.replaceChildren(goBackBtn,clearScoresBtn); 
         return false;
     } 
     allScores = JSON.parse(allScores);
-    //Create list of previous scores, ul = scoreList, li = listLoopEl then scoreListEl[i], same index as allScores
+
+    //Create list of previous scores, ul = scoreList, li = scoreListEl[i], same index as allScores
     var scoreList = document.createElement("ul");
     scoreList.setAttribute("class","scores-ul");
     var scoreListEls = [];
-    
-    //Theres no way that I had to split this up like this, couldn't find another way that worked
     for (let i = 0; i < allScores.length;i++) {
         scoreListEls[i] = document.createElement("li");
         scoreListEls[i].setAttribute("class","highscore-list-el");
-        scoreListEls[i].innerHTML = allScores[i].initial + ": " + allScores[i].quizScore; 
+        scoreListEls[i].innerHTML = allScores[i].initial + ": " + allScores[i].quizScore + "%"; 
         scoreList.appendChild(scoreListEls[i]);
     }
 
@@ -154,7 +236,7 @@ var loadScoreForm = function() {
 };
 
 //SET TIMER, count-- every second, 
-//IF <= clear interval, remove click listener, and load the score form
+//IF count <= 0: clear interval, remove click listener, and load the score form
 var setTimer = function() {
     timerEl.innerHTML = "time: " + timerCount.toString();
     timerCount--;
@@ -224,12 +306,16 @@ var choiceHandler = function(event) {
         //IF OUT OF QUESTIONS, END QUIZ by setting time to 0
         if(!qsArray[qcount]){
             timerCount = 0;
+            window.alert("You answered all of the questions! Enter your initials to submit your score!");
             return false;
         }
+        //LOAD NEXT QUESTION
         var qAndChoices = loadNewQuestion(qsArray[qcount]);
+        //GET TARGET OF LAST CHOICE
         var qchoice = event.target.getAttribute("id");
         //because of the way I set the function up, answers check index [qcount-1]
         if (qcount !== 0) {
+            //IF CHOICE WAS CORRECT
             if (qchoice == qsArray[qcount-1].answer) {
                 qsCorrect++;
                 rightWrong.textContent = "Correct!";
@@ -239,6 +325,7 @@ var choiceHandler = function(event) {
                 timerCount -= 15;
             }
         } else {
+            //QUIZ ENDS WHEN SET TIMER HITS 0
             timerInt = setInterval(setTimer,1000);
 
         }
